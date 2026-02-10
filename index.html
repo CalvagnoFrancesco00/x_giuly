@@ -2,75 +2,82 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>Lettera di San Valentino ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>San Valentino ❤️</title>
 
 <style>
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ff5f9e, #ff9ad5);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont;
     overflow: hidden;
+    transition: background 1s;
 }
 
 .lettera {
     background: white;
-    padding: 40px;
-    max-width: 500px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 420px;
+    padding: 30px 25px;
+    border-radius: 25px;
     text-align: center;
-    animation: fadeIn 2s ease;
+    box-shadow: 0 15px 40px rgba(0,0,0,.3);
+    animation: pop 1.5s ease;
 }
 
 h1 {
-    color: #ff3366;
+    color: #ff2f6d;
+    font-size: clamp(24px, 6vw, 32px);
 }
 
 p {
-    font-size: 18px;
+    font-size: clamp(16px, 4vw, 18px);
     line-height: 1.6;
 }
 
 button {
     margin-top: 20px;
-    padding: 10px 20px;
+    padding: 14px 26px;
+    font-size: 17px;
     border: none;
-    border-radius: 20px;
-    background: #ff3366;
+    border-radius: 30px;
+    background: #ff2f6d;
     color: white;
     cursor: pointer;
-    font-size: 16px;
+    transition: transform .2s, background .3s;
+}
+
+button:active {
+    transform: scale(0.92);
 }
 
 button:hover {
-    background: #ff1f55;
+    background: #ff0f58;
 }
 
 .heart {
     position: absolute;
-    color: red;
-    font-size: 20px;
-    animation: float 6s linear infinite;
+    animation: float 5s linear forwards;
+    pointer-events: none;
 }
 
 @keyframes float {
-    from {
-        transform: translateY(100vh);
-        opacity: 1;
-    }
-    to {
-        transform: translateY(-10vh);
-        opacity: 0;
-    }
+    from {transform: translateY(100vh); opacity:1;}
+    to {transform: translateY(-10vh); opacity:0;}
 }
 
-@keyframes fadeIn {
-    from {opacity: 0; transform: scale(0.8);}
-    to {opacity: 1; transform: scale(1);}
+@keyframes pop {
+    from {transform: scale(.7); opacity:0;}
+    to {transform: scale(1); opacity:1;}
 }
 </style>
 </head>
@@ -80,35 +87,66 @@ button:hover {
 <div class="lettera">
     <h1>❤️ Buon San Valentino ❤️</h1>
     <p id="messaggio">
-        Sei la persona che rende ogni mio giorno più bello.
-        Grazie per il tuo sorriso, il tuo amore e per esserci sempre.
+        Sei la parte più bella delle mie giornate.
+        Ogni momento con te è un regalo.
     </p>
 
-    <button onclick="cambiaMessaggio()">Clicca per un messaggio speciale 💕</button>
+    <button onclick="interagisci()">Tocca il cuore 💕</button>
 </div>
 
 <script>
-function cambiaMessaggio() {
-    document.getElementById("messaggio").innerHTML =
-        "Ti amo più di ieri e meno di domani. Sei il mio cuore, oggi e per sempre ❤️";
+
+const messaggi = [
+ "Ti amo più di ieri e meno di domani ❤️",
+ "Con te ogni giorno è San Valentino 💖",
+ "Sei il mio per sempre 💕",
+ "Il mio cuore sceglie te, sempre ❤️",
+ "Tu sei casa 🏡❤️"
+];
+
+let index = 0;
+
+function interagisci() {
+    document.getElementById("messaggio").innerText = messaggi[index];
+    index = (index + 1) % messaggi.length;
+
+    cambiaSfondo();
+    esplosioneCuori();
 }
 
-// cuoricini che salgono
+function cambiaSfondo() {
+    const colori = [
+        ["#ff5f9e", "#ff9ad5"],
+        ["#ff758c", "#ff7eb3"],
+        ["#ff416c", "#ff4b2b"],
+        ["#f857a6", "#ff5858"]
+    ];
+    const c = colori[Math.floor(Math.random() * colori.length)];
+    document.body.style.background = `linear-gradient(135deg, ${c[0]}, ${c[1]})`;
+}
+
+function esplosioneCuori() {
+    for (let i = 0; i < 15; i++) {
+        creaCuore();
+    }
+}
+
 function creaCuore() {
     const cuore = document.createElement("div");
     cuore.className = "heart";
     cuore.innerHTML = "❤️";
+
     cuore.style.left = Math.random() * 100 + "vw";
-    cuore.style.fontSize = Math.random() * 20 + 15 + "px";
+    cuore.style.fontSize = Math.random() * 25 + 15 + "px";
 
     document.body.appendChild(cuore);
 
-    setTimeout(() => {
-        cuore.remove();
-    }, 6000);
+    setTimeout(() => cuore.remove(), 5000);
 }
 
-setInterval(creaCuore, 300);
+// cuori continui soft
+setInterval(creaCuore, 700);
+
 </script>
 
 </body>
