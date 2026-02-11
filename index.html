@@ -10,7 +10,7 @@
 
 body {
   font-family: 'Playfair Display', serif;
-  background: linear-gradient(to bottom, #fdf6f0, #fff0f5);
+  background: linear-gradient(to bottom, #fdf6f0, #fff0f5); /* sfondo uniforme */
   display:flex;
   justify-content:center;
   align-items:center;
@@ -51,7 +51,7 @@ body {
   width:100%;
   padding:50px 20px;
   border-radius:15px;
-  background:#fff0f5;
+  background: linear-gradient(to bottom, #fdf6f0, #fff0f5); /* uniforme con il body */
   box-shadow:0 5px 20px rgba(0,0,0,0.2);
   position:absolute;
   top:0;
@@ -72,7 +72,6 @@ body {
 
 .envelope .back {
   transform: rotateX(180deg);
-  background:#fffdf5;
   flex-direction:column;
   padding:30px 20px;
   color:#4a2c2a;
@@ -105,18 +104,24 @@ body {
 #catImage {
   position: absolute;
   top:50px;
-  left:0px; /* parte dal lato sinistro */
+  left:0px;
   cursor:pointer;
-  transition: all 0.5s ease; /* animazione morbida dello spostamento */
+  transition: all 0.5s ease; /* animazione morbida */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Specchio quando a destra */
 .flip { transform: scaleX(-1); }
 
-@media (max-width:360px){
+/* Responsive per mobile */
+@media (max-width:480px){
   .envelope .front h1 { font-size:1.5rem; }
-  .letter-text { font-size:1rem; }
+  .letter-text { font-size:1rem; text-align:center; }
   #cat { font-size:4rem; }
+  #catImage { width:80px; height:auto; } /* gattino più piccolo */
 }
 </style>
 </head>
@@ -132,18 +137,18 @@ body {
       <h1>La tua lettera ti aspetta</h1>
     </div>
     <div class="back">
-      <h1>Da Francy</h1>
+      <h1>Da Lady Whistledown</h1>
       <p class="letter-text" id="letterText"></p>
     </div>
   </div>
 </div>
 
-<!-- Immagine che si sposta solo ai lati -->
+<!-- Immagine gattino laterale -->
 <img id="catImage" src="//mofusand-mofumofu-market.jp/cdn/shop/files/hyoko_100x.png?v=9699436684720925096" 
      width="134" height="175" loading="eager" alt="">
 
 <script>
-const text = `Giuly,
+const text = `Cari lettori,
     
 In questa giornata di San Valentino, l'amore aleggia tra i saloni e le corti come un profumo delicato. 
 Che la vostra vita sia colma di eleganza, romance e piccoli scandali del cuore.
@@ -183,18 +188,18 @@ catImage.addEventListener('click', () => {
   const windowWidth = window.innerWidth;
   const imgWidth = catImage.offsetWidth;
 
-  // Decidiamo casualmente se andare a sinistra o destra
+  // Lato casuale
   const goRight = Math.random() < 0.5;
   
   if(goRight){
-    catImage.style.left = (windowWidth - imgWidth - 10) + 'px'; // lato destro
+    catImage.style.left = (windowWidth - imgWidth - 10) + 'px';
     catImage.classList.add('flip'); // specchia
   } else {
-    catImage.style.left = '10px'; // lato sinistro
+    catImage.style.left = '10px';
     catImage.classList.remove('flip'); // normale
   }
 
-  // Posizione verticale casuale ma entro la finestra
+  // Altezza casuale entro finestra
   const windowHeight = window.innerHeight;
   const imgHeight = catImage.offsetHeight;
   const randomY = Math.floor(Math.random() * (windowHeight - imgHeight));
