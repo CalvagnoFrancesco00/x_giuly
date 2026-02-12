@@ -1,71 +1,3 @@
-
-
-<!DOCTYPE html> <html lang="it"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <title>Lettera di Lady Whistledown</title> <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> <link href="h
-
-pasted
-
-quando poi premo sulla lettera non la apre , la parte della selezione puoi farmi tutto un po' moderno? in genrale un po'? tutto graziee
-
-23:17
-Ti aiuto a sistemare il codice! Ho risolto il problema della lettera che non si apre e modernizzato l'interfaccia. Ecco il file aggiornato:
-
-
-File creato, file letto
-Ho sistemato tutto! 🎉
-
-Problemi risolti:
-
-✅ La lettera ora si apre correttamente quando clicchi sulla busta
-✅ Design completamente modernizzato con gradiente viola/viola scuro
-✅ Effetti hover fluidi e animazioni migliorate
-✅ Carte moderne per la selezione lettera/foto
-✅ Migliore esperienza mobile
-Novità del design moderno:
-
-Sfondo con gradiente viola elegante
-Card glassmorphism per il PIN
-Animazioni fluide su hover
-Icone più grandi e spaziatura migliore
-Ombre moderne e border-radius arrotondati
-Responsive ottimizzato
-Il PIN di default è ancora "1234" - puoi cambiarlo nel codice JavaScript dove dice const correctPin = "1234";
-
-Valentine letter modern
-Codice · HTML 
-nelle pagine della lettera e delle foto puoi mettere un tasto home che torni alla selezione?, comunque rendi tutto uguale anche la pagina della lettera con lo stile moderno, ma tutto a tema san valentino. inoltre il gatto quando si trova sul lato destro deve specchiarsi
-
-23:21
-
-13 file modificati, file letto
-Perfetto! Ho aggiornato tutto! 💕
-
-Modifiche effettuate:
-
-✅ Tema San Valentino completo - Gradiente rosa/fucsia su tutte le pagine ✅ Pulsante Home - In alto a sinistra nelle pagine lettera e foto per tornare alla selezione ✅ Stile moderno uniforme - Card con glassmorphism, ombre moderne, border-radius arrotondati ✅ Gatto specchiato - Ora quando il gatto si sposta sul lato destro si specchia correttamente guardando a sinistra ✅ Reset busta - Quando torni alla home page e riapri la lettera, la busta si resetta e puoi riaprirla
-
-Dettagli del design:
-
-Colori San Valentino: rosa 
-#ff6b9d e fucsia 
-#c94b7a
-Pulsanti home eleganti con icona casetta
-Busta con sfondo semi-trasparente e sfocatura
-Foto con cornice bianca
-Animazioni fluide ovunque
-Buon San Valentino! 💌
-
-Valentine letter modern
-Codice · HTML 
-
-
-Vuoi ricevere una notifica quando Claude risponde?
-
-
-
-Claude è un'AI e può commettere errori. Verifica le risposte.
-Valentine letter modern · HTML
-Copia
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -348,19 +280,173 @@ body {
   min-height: 100vh;
   background: linear-gradient(135deg, #ff6b9d 0%, #c94b7a 100%);
   position: relative;
+  overflow: hidden;
 }
 
 .photo-container {
-  max-width: 600px;
+  max-width: 800px;
   padding: 2rem;
+  text-align: center;
 }
 
-.photo-container img {
-  width: 100%;
+.photo-title {
+  color: white;
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Polaroid Camera */
+.polaroid-camera {
+  width: 280px;
+  padding: 20px;
+  background: linear-gradient(135deg, #fff 0%, #f5f5f5 100%);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  border-radius: 2rem 2rem 0.5rem 0.5rem;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  margin: 0 auto 3rem;
+  transition: transform 0.3s ease;
+}
+
+.polaroid-camera:hover {
+  transform: translateY(-5px) rotate(-1deg);
+}
+
+.polaroid-camera::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 30px;
+  background: #c94b7a;
+  border-radius: 1rem 1rem 0 0;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.polaroid-camera::after {
+  content: '📷';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+}
+
+.camera-lens {
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, #333 0%, #000 70%);
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  border: 8px solid #666;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.camera-lens::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  width: 30%;
+  height: 30%;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+}
+
+.camera-button {
+  background: #ff6b9d;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
   border-radius: 2rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+}
+
+.camera-button:hover {
+  background: #ff5189;
+  transform: scale(1.05);
+}
+
+.camera-label {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+/* Flash effect */
+.flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: white;
-  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.flash.active {
+  animation: flashAnim 0.4s forwards;
+}
+
+@keyframes flashAnim {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Polaroid photos output */
+.polaroid-gallery {
+  position: relative;
+  min-height: 500px;
+  margin-top: 2rem;
+}
+
+.output-photo {
+  position: absolute;
+  width: 200px;
+  padding: 10px;
+  padding-bottom: 40px;
+  background: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: none;
+  opacity: 0;
+  cursor: grab;
+  z-index: 1;
+}
+
+.output-photo:active {
+  cursor: grabbing;
+}
+
+.output-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.output-photo::after {
+  content: attr(data-caption);
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  color: #666;
+  font-size: 1.2rem;
 }
 
 /* Gattino */
@@ -412,6 +498,23 @@ body {
   
   .pin-card {
     padding: 2rem 1.5rem;
+  }
+  
+  .polaroid-camera {
+    width: 240px;
+  }
+  
+  .photo-title {
+    font-size: 2.5rem;
+  }
+  
+  .output-photo {
+    width: 160px;
+  }
+  
+  .home-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
   }
 }
 </style>
@@ -476,18 +579,29 @@ body {
     <span>🏠</span>
     <span>Home</span>
   </button>
+  <div class="flash" id="flash"></div>
   <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
     <div class="photo-container">
-      <img src="img/mofusand_cat_rose.png" alt="Foto speciale">
+      <h1 class="photo-title">I Nostri Ricordi</h1>
+      
+      <!-- Polaroid Camera -->
+      <div class="polaroid-camera" id="polaroidCamera">
+        <div class="camera-lens"></div>
+        <button class="camera-button">Scatta Foto 💕</button>
+        <p class="camera-label">Clicca per vedere i nostri momenti speciali</p>
+      </div>
+      
+      <!-- Gallery of Polaroid photos -->
+      <div class="polaroid-gallery" id="polaroidGallery"></div>
     </div>
   </div>
 </div>
 
 <!-- Gattino -->
-<img id="catImage" src="img/mofusand_cat_rose.png" width="100" height="120">
+<img id="catImage" src="img/mofusand_cat_rose.png" width="80" height="110">
 
 <script>
-const correctPin = "1234"; // Cambia il PIN qui
+const correctPin = "7771"; // Cambia il PIN qui
 const pinScreen = document.getElementById("pinScreen");
 const pinInput = document.getElementById("pinInput");
 const pinButton = document.getElementById("pinButton");
@@ -554,6 +668,7 @@ document.getElementById("homeFromLetter").addEventListener("click", () => {
 document.getElementById("homeFromPhoto").addEventListener("click", () => {
   photoScreen.style.display = "none";
   choiceScreen.style.display = "block";
+  resetPolaroid();
 });
 
 // Reset envelope function
@@ -563,6 +678,101 @@ function resetEnvelope() {
   opener.style.animation = "pulse 1.5s infinite";
   opener.style.transform = "scale(1)";
   letter.innerHTML = "";
+}
+
+// POLAROID CAMERA
+const polaroidCamera = document.getElementById('polaroidCamera');
+const flash = document.getElementById('flash');
+const polaroidGallery = document.getElementById('polaroidGallery');
+
+// Array delle tue foto - SOSTITUISCI CON I TUOI PERCORSI
+const polaroidImages = [
+  { src: 'img/IMG_20251208_184022.jpg', caption: ' 💋' },
+  { src: 'img/IMG_20251208_184117.jpg', caption: 'Avventura insieme 🌟' },
+  { src: 'img/IMG20251202122726.jpg', caption: 'Risate infinite 😄' },
+  { src: 'img/IMG20251204131605.jpg', caption: 'Amore eterno 💕' },
+  { src: 'img/IMG20251227182936.jpg', caption: 'Per sempre ❤️' }
+];
+
+let photoIndex = 0;
+
+polaroidCamera.addEventListener('click', () => {
+  if (photoIndex >= polaroidImages.length) {
+    // Mostra messaggio quando finite le foto
+    return;
+  }
+
+  // Flash effect
+  flash.classList.add('active');
+  setTimeout(() => flash.classList.remove('active'), 400);
+
+  // Create polaroid photo
+  setTimeout(() => {
+    const polaroid = document.createElement('div');
+    polaroid.classList.add('output-photo');
+    polaroid.setAttribute('data-caption', polaroidImages[photoIndex].caption);
+    
+    const img = document.createElement('img');
+    img.src = polaroidImages[photoIndex].src;
+    img.alt = polaroidImages[photoIndex].caption;
+    
+    // Fallback to placeholder if image not found
+    img.onerror = function() {
+      this.src = 'https://via.placeholder.com/200x200/ff6b9d/ffffff?text=' + encodeURIComponent(polaroidImages[photoIndex].caption);
+    };
+    
+    polaroid.appendChild(img);
+
+    // Posizione iniziale: dalla parte inferiore della camera (slot di uscita)
+    const cameraRect = polaroidCamera.getBoundingClientRect();
+    const galleryRect = polaroidGallery.getBoundingClientRect();
+    
+    // Calcola posizione relativa alla gallery
+    const startX = cameraRect.left - galleryRect.left + (cameraRect.width / 2) - 100;
+    const startY = cameraRect.bottom - galleryRect.top - 220; // Dentro la camera
+    
+    polaroid.style.left = startX + 'px';
+    polaroid.style.top = startY + 'px';
+    polaroid.style.transform = 'translateY(0) rotate(0deg) scale(0.9)';
+    polaroid.style.opacity = '0.3';
+    
+    polaroidGallery.appendChild(polaroid);
+
+    // Prima fase: esce dalla Polaroid verso il basso
+    setTimeout(() => {
+      polaroid.style.transform = 'translateY(120px) rotate(0deg) scale(1)';
+      polaroid.style.opacity = '1';
+      polaroid.style.transition = 'transform 0.6s ease-out, opacity 0.6s ease-out';
+    }, 50);
+
+    // Seconda fase: si sposta nella posizione finale casuale
+    setTimeout(() => {
+      const angle = (Math.random() * 30 - 15); // Random rotation
+      const offsetX = (Math.random() * 300 - 150); // Random horizontal offset
+      const offsetY = 180 + (Math.random() * 100); // Random vertical offset
+      
+      polaroid.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${angle}deg) scale(1)`;
+      polaroid.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    }, 800);
+
+    photoIndex++;
+
+    // Update button text when all photos shown
+    if (photoIndex >= polaroidImages.length) {
+      const btn = polaroidCamera.querySelector('.camera-button');
+      btn.textContent = 'Tutte le foto scattate! 📸';
+      btn.style.background = '#c94b7a';
+    }
+  }, 300);
+});
+
+// Reset polaroid gallery
+function resetPolaroid() {
+  photoIndex = 0;
+  polaroidGallery.innerHTML = '';
+  const btn = polaroidCamera.querySelector('.camera-button');
+  btn.textContent = 'Scatta Foto 💕';
+  btn.style.background = '#ff6b9d';
 }
 
 // APERTURA LETTERA - FIX
