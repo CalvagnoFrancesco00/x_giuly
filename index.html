@@ -29,6 +29,38 @@
   100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
 }
 
+#welcomeGif {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.6);
+  opacity: 0;
+  z-index: 9999;
+  pointer-events: none;
+  transition: all 0.8s ease;
+  border-radius: 200px;
+  /* Aggiungendo 10px di espansione l'ombra "esce" di più dai bordi */
+  box-shadow: 0 0 60px 80px rgba(255, 107, 129, 0.6);
+  background-color: rgba(255, 107, 129, 0.6);
+}
+
+#welcomeGif.show {
+  opacity: 1;
+  /* transform: translate(-50%, -50%) scale(1); */
+}
+
+#welcomeGif.hide {
+  opacity: 0;
+  /* transform: translate(-50%, -50%) scale(1.4); */
+}
+
+#welcomeGif img {
+  width: 260px;
+  max-width: 80vw;
+  filter: drop-shadow(0 100 100px rgba(255,107,129,0.8));
+}
+
+
 .heart-float {
   animation: float 3s ease-in-out infinite;
 }
@@ -68,12 +100,15 @@
   50% { opacity: 1; transform: scale(1); }
 }
 
-body {
+html, body {
   font-family: 'Playfair Display', serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   min-height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
 }
 
 /* Schermata PIN moderna con tema scuro */
@@ -165,6 +200,7 @@ body {
   min-height: 100vh;
   background: linear-gradient(135deg, #1a0a0f 0%, #2d1018 25%, #3d1520 50%, #2d1018 75%, #1a0a0f 100%);
   overflow: hidden;
+  position: relative;
 }
 
 .choice-container {
@@ -267,6 +303,7 @@ body {
   animation: float 3s ease-in-out infinite;
   transition: all 0.3s ease;
   filter: drop-shadow(0 0 20px rgba(255, 107, 129, 0.6));
+  will-change: transform;
 }
 
 #valentineEnvelope:hover {
@@ -596,6 +633,10 @@ body {
 }
 </style>
 </head>
+<div id="welcomeGif">
+  <img src="img/mofu_ok_love.gif" alt="Welcome">
+</div>
+
 <body class="h-full">
 
 <!-- SCHERMATA PIN -->
@@ -626,7 +667,7 @@ body {
   </div>
   
   <div class="pin-card">
-    <h2>Sblocca il Segreto</h2>
+    <h2>Inserisci il pin Segreto</h2>
     <input type="password" id="pinInput" maxlength="4" placeholder="••••">
     <button id="pinButton">Sblocca</button>
     <p id="pinError" style="display:none;">PIN Errato! Riprova.</p>
@@ -661,11 +702,11 @@ body {
     <h1 class="choice-title">Cosa desideri vedere?</h1>
     <div class="choice-cards">
       <div class="choice-card" id="showLetter">
-        <span class="choice-icon">💌</span>
+        <span class="choice-icon"> <img src="icon/love-letter.png" alt="Foto speciali" width="80" height="80"></span>
         <h3>Lettera</h3>
       </div>
       <div class="choice-card" id="showPhoto">
-        <span class="choice-icon">🖼️</span>
+        <span class="choice-icon"> <img src="icon/love_picture.png" alt="Foto speciali" width="80" height="80"></span>
         <h3>Foto Speciali</h3>
       </div>
     </div>
@@ -748,6 +789,7 @@ body {
   <div class="flash" id="flash"></div>
   <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
     <div class="photo-container">
+      <br>
       <h1 class="photo-title">Our memories</h1>
       
       <!-- Polaroid Camera -->
@@ -904,11 +946,15 @@ const flash = document.getElementById('flash');
 const polaroidGallery = document.getElementById('polaroidGallery');
 
 const polaroidImages = [
-  { src: 'img/IMG_20251208_184022.jpg', caption: ' 💋' },
-  { src: 'img/IMG_20251208_184117.jpg', caption: 'Avventura insieme 🌟' },
-  { src: 'img/IMG20251202122726.jpg', caption: 'Risate infinite 😄' },
-  { src: 'img/IMG20251204131605.jpg', caption: 'Amore eterno 💕' },
-  { src: 'img/IMG20251227182936.jpg', caption: 'Per sempre ❤️' }
+  { src: 'img/messina_1.jpg', caption: ' ✌️' },
+  { src: 'img/messina_2.jpg', caption: '😁☀️' },
+  { src: 'img/parigi_2.jpg', caption: '💕' },
+  { src: 'img/ponte_!.jpg', caption: '🛳️❤️' },
+  { src: 'img/lago_1.jpg', caption: '🚤' },
+  { src: 'img/halloween_1.jpg', caption: '🎃' },
+  { src: 'img/casino_1.jpg', caption: 'Big money 💵' },
+  { src: 'img/vaticano_1.jpg', caption: '💕' },
+  { src: 'img/camping_1.jpg', caption: '⛺' },
 ];
 
 let photoIndex = 0;
@@ -1011,6 +1057,39 @@ cat.addEventListener("click", () => {
   }
   cat.style.top = Math.random() * maxY + "px";
 });
+
+function checkPin() {
+  if (pinInput.value === correctPin) {
+
+    const gif = document.getElementById("welcomeGif");
+
+    gif.classList.add("show");
+
+    setTimeout(() => gif.classList.add("hide"), 500);
+
+    setTimeout(() => {
+      gif.classList.remove("show", "hide");
+
+      pinScreen.style.display = "none";
+      choiceScreen.style.display = "block";
+      clearInterval(pinHeartInterval);
+
+      createSparkles('sparkles-container-choice');
+      setInterval(() => createFallingHeart('hearts-container-choice'), 200);
+    }, 600);
+
+  } else {
+    pinError.style.display = "block";
+    pinInput.value = "";
+    pinInput.classList.add("shake");
+
+    setTimeout(() => {
+      pinInput.classList.remove("shake");
+      pinError.style.display = "none";
+    }, 500);
+  }
+}
+
 </script>
 
 </body>
